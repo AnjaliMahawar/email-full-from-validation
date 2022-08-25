@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript Form Validation</title>
+		<style type="text/css">
+			input{
+				width: 250px !important;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<form action="" method="post" onsubmit="return on_form_sbmt()">
+			
+			<input type="text" name="full_name" id="id_full_name" placeholder="Full Name"  required /><br/><br/>
+			<input type="text" name="company_name" id="id_company_name" placeholder="Company Name"  required /><br/><br/>
+			<input type="tel" name="phone_no" id="id_phone_no" placeholder="Phone No with country code or 0"  required /><br/><br/>
+			<input type="email" name="email" id="id_email"  placeholder="Email Address"  required /><br/><br/>	
+			<div id="txtHint" style="color: orange;"></div>
+			<br/><br/>
+			<input type="submit" name="form_submit" value="Submit The Form" />
+		</form>
+
+		<script type="text/javascript">
+			function on_form_sbmt() {
+               
+                var full_name = document.getElementById("id_full_name");
+                var company_name = document.getElementById("id_company_name");
+                var phone_no = document.getElementById("id_phone_no");
+                var email = document.getElementById("id_email");
+
+                var textHint = document.getElementById("txtHint");
+                
+                
+
+                if (full_name.value.length < 2 || !/^[A-Za-z\s]+$/.test(full_name.value)) { 
+                    textHint.innerHTML = "<p style='color:red;font-size: 18px;'>Please Fill Your Name Properly</p>";
+                    full_name.focus()
+                    full_name.required=true;
+                   // full_name.setCustomValidity("Please Fill Your Name Properly");
+                    return false;
+                }else{
+                	//textHint.innerHTML = "";
+                  // full_name.required=true;
+                    //full_name.setCustomValidity("");
+                }
+
+                if (company_name.value.length == 0) { 
+                    textHint.innerHTML = "<p style='color:red;font-size: 18px;'>Please Fill Your Company Name</p>";
+                    company_name.focus()
+                    company_name.required=true;
+                   // company_name.setCustomValidity("Please Fill Your Company Name");
+                    return false;
+                }else{
+                	textHint.innerHTML = "";
+                    company_name.focus()
+                    company_name.required=false;
+                    //company_name.setCustomValidity("");
+                }
+
+                if ((phone_no.value).length!=10 ) { 
+                    textHint.innerHTML = "<p style='color:red;font-size: 18px;'>Please Fill Your Ph No With 10 digits</p>";
+                    phone_no.focus()
+                    phone_no.required=true;
+                   /// phone_no.setCustomValidity("Please Fill Your Ph No With +91 Or 0");
+                    return false;
+                }else{
+                	textHint.innerHTML = "";
+                    phone_no.focus()
+                   	phone_no.required=false;
+                    //phone_no.setCustomValidity("");
+                }
+
+                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) { 
+                    textHint.innerHTML = "<p style='color:red;font-size: 18px;'>Please Fill Your Email Id Properly</p>";
+                    email.focus()
+                   	email.required=true;
+                    //email.setCustomValidity("Please Fill Your Email Id Properly");
+                    return false;
+                }else{
+                	textHint.innerHTML = "";
+                    email.focus()
+                    email.required=true;
+                    //email.setCustomValidity("");
+                }
+                alert('data submitted successfully')
+                return true;
+            }
+		</script>
+	</body>
+</html>
